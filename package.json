@@ -9,6 +9,6 @@
   },
   "scripts": {
     "start": "node index.js",
-    "heroku-postbuild": "cd client && yarn install && yarn run build-chrome"
+    "heroku-postbuild": "cd client && rm -rf  node_modules/ && npm install && npm run build-chrome"
   }
 }
