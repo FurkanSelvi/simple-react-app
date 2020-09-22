@@ -5,3 +5,22 @@
 
 ## Kurulum ve Çalıştırma
 - Terminali kullanarak sırayla `npm install` ve `npm start` komutlarını çalıştırın.
+
+## DEMO
+[DEMO](https://simple-react-app-fs.herokuapp.com)
+
+## Kullanıcılar 
+```javascript
+{
+    {
+      username: 'username',
+      password: 'username',
+      userPermissions: [],
+    },
+    {
+      username: 'protected',
+      password: 'protected',
+      userPermissions: ['protectedHome'],
+    }
+}
+```
