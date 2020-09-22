@@ -38,20 +38,21 @@
     "import": "i18n_import"
   },
   "devDependencies": {
-    "browserslist": "^4.6.3",
     "caniuse-lite": "^1.0.30000974",
     "cross-env": "^5.2.0",
     "gh-pages": "^2.0.1",
     "prettier": "1.18.2"
   },
-  "resolutions": {
-    "browserslist": "4.6.2",
-    "caniuse-lite": "1.0.30000974"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }
