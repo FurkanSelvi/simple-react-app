@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { setAuthInfo, addUser } from "../../../redux/auth/actions";
-import { useSelector, useDispatch } from 'react-redux';
-import { toastr } from "react-redux-toastr";
+import { useDispatch } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { withRouter } from "react-router-dom";
@@ -11,6 +10,7 @@ import { useStyles } from '../data'
 import Loading from "../../../components/Loading";
 import { SelectValue } from "../../../components/SelectValue";
 import { generateToken } from "../../../helpers/utils";
+import { FormControl } from "@material-ui/core";
 
 const checkEmail = (email) => {
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -21,30 +21,31 @@ const Register = (props, context) => {
   const { t } = context;
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [form, setForm] = useState({ username: '', password: '', email: '', city: null, town: null })
+  const [form, setForm] = useState({ username: '', password: '', email: '' })
   const [errors, setErrors] = useState({ username: '', password: '', email: '' })
   const [loading, setLoading] = useState(false);
 
   const { renderSelect: renderCity, selectedValue: selectedCity } = SelectValue(context, {
     fetchUrl: '/v1/cities',
-    baseURL: 'https://il-ilce-rest-api.herokuapp.com',
+    baseURL: 'https://cors-anywhere.herokuapp.com/https://il-ilce-rest-api.herokuapp.com',
     noParent: true,
     defValue: [form.city],
-    divStyle: {paddingBottom: 10},
+    divStyle: { padding: "10px 0px 10px" },
     label: 'il',
     mapper: e => ({
-      value: e.id,
+      value: e._id,
       label: e.name,
     }),
   });
 
   const { renderSelect: renderTown, selectedValue: selectedTown } = SelectValue(context, {
-    fetchUrl: `/v1/cities/${form.city}/towns`,
-    baseURL: 'https://il-ilce-rest-api.herokuapp.com',
+    fetchUrl: `/v1/cities/${selectedCity?.value}/towns`,
+    baseURL: 'https://cors-anywhere.herokuapp.com/https://il-ilce-rest-api.herokuapp.com',
     params: {
-      data: { city: form.city },
+      data: { city: selectedCity?.value || null },
       required: ['city'],
     },
+    divStyle: { padding: "10px 0px 10px" },
     defValue: [form.town],
     label: 'İlçe',
     mapper: e => ({
@@ -53,9 +54,6 @@ const Register = (props, context) => {
     }),
   });
 
-
-  //https://il-ilce-rest-api.herokuapp.com/v1/cities
-  //https://il-ilce-rest-api.herokuapp.com/v1/cities/00772b2fb92df11ee3a090ab53c4e2ae/towns
   const onChangeForm = (e) => {
     const { name, value } = e.target;
 
@@ -99,8 +97,8 @@ const Register = (props, context) => {
       setLoading(false);
       return;
     } else {
-      const user = { ...form, token: generateToken() };
-      dispatch(addUser(user));
+      const user = { ...form, token: generateToken(), city: selectedCity, town: selectedTown };
+      dispatch(addUser([user]));
       dispatch(setAuthInfo(user));
     }
   }
@@ -122,8 +120,6 @@ const Register = (props, context) => {
         error={!!errors.username}
         helperText={errors.username}
       />
-      {renderCity()}
-      {renderTown()}
       <TextField
         variant="outlined"
         margin="normal"
@@ -154,6 +150,8 @@ const Register = (props, context) => {
         error={!!errors.password}
         helperText={errors.password}
       />
+      {renderCity()}
+      {renderTown()}
       <Button
         type="submit"
         fullWidth

@@ -28,7 +28,7 @@ export default function reducer(state = initialState, action) {
         information
       };
     case AUTH_ADD_USER:
-      const users = [...state.information, ...action.payload];
+      const users = [...state.users, ...action.payload];
       return {
         ...state,
         users

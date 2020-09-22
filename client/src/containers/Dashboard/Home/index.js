@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import { useStyles } from '../../../components/Layout/data'
+import { useSelector } from 'react-redux';
 
 const drawerWidth = 240;
 
 const Home = (props) => {
-  const { } = props;
+  const { username } = useSelector(store => store.auth.information);
   const classes = useStyles();
 
 
@@ -14,6 +15,8 @@ const Home = (props) => {
     <main className={classes.content}>
       <div className={classes.toolbar} />
       <Typography paragraph>
+        <span> Hoş geldin </span><span style={{fontWeight: 'bold'}}>{username}</span> <br/><br/>
+
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
         ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
         facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
