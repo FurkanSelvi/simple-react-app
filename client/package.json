@@ -38,7 +38,7 @@
     "import": "i18n_import"
   },
   "devDependencies": {
-    "browserslist": "4.6.3",
+    "browserslist": "^4.6.3",
     "caniuse-lite": "^1.0.30000974",
     "cross-env": "^5.2.0",
     "gh-pages": "^2.0.1",
