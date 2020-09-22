@@ -15,6 +15,7 @@ export const translations = {
     'dashboard': 'Ana Sayfa',
     'protected': 'Korumalı',
     'logout': 'Çıkış',
+    'table': 'Tablo',
   },
   'en': {
     'header': 'Title',
@@ -30,5 +31,6 @@ export const translations = {
     'dashboard': 'Dashboard',
     'protected': 'Protected',
     'logout': 'Logout',
+    'table': 'Table',
   }
 }

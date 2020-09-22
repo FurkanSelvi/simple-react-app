@@ -2,11 +2,13 @@ import React from "react";
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import LockIcon from '@material-ui/icons/Lock';
+import TableChartIcon from '@material-ui/icons/TableChart';
 import { makeStyles } from '@material-ui/core/styles';
 
 export const navlinks = [
     { title: 'dashboard', path: '/', icon: <DashboardIcon /> },
     { title: 'protected', path: '/protected-home', icon: <LockIcon /> },
+    { title: 'table', path: '/table', icon: <TableChartIcon /> },
     {
         title: 'logout', icon: <ExitToAppIcon />
     },
